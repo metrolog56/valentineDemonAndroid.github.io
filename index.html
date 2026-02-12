@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Будешь моей валентинкой?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 16px;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 32px;
+            color: #ff1493;
+            text-shadow: 0 0 12px #fff;
+            animation: fall linear infinite;
+            opacity: 0.85;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh); }
+        }
+
+        .content { 
+            text-align: center; 
+            z-index: 10; 
+            max-width: 760px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.2rem;
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 80px;
+            letter-spacing: -1px;
+            text-shadow: 0 6px 24px rgba(255,20,147,0.45);
+        }
+
+        .buttons {
+            position: relative;
+            width: 680px;
+            max-width: 100%;
+            height: 220px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            position: absolute;
+            padding: 24px 64px;
+            font-size: 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+            transition: all 0.65s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        #yesBtn {
+            background: #ff1493;
+            color: white;
+            left: 8%;
+            top: 35%;
+        }
+
+        #noBtn {
+            background: white;
+            color: #ff1493;
+            left: 55%;
+            top: 35%;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Кнопка "Нет" не масштабируется при движении */
+        #noBtn.moving {
+            transform: none !important;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 48px;
+            }
+
+            .buttons {
+                height: 180px;
+            }
+
+            .btn {
+                padding: 16px 32px;
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <div class="content">
+        <h1>Ты будешь моей валентинкой,<br>Дашка Андронова?</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn" class="btn">Да ❤️</button>
+            <button id="noBtn" class="btn">Нет</button>
+        </div>
+    </div>
+
+    <script>
+        // Падающие сердечки
+        function createHeart() {
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.textContent = ['❤️','💖','💗','💓','💞'][Math.floor(Math.random()*5)];
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            h.style.fontSize = (Math.random() * 26 + 26) + 'px';
+            document.getElementById('hearts').appendChild(h);
+            setTimeout(() => h.remove(), 15000);
+        }
+        setInterval(createHeart, 180);
+        for(let i = 0; i < 30; i++) createHeart();
+
+        // Логика кнопки "Нет"
+        const noBtn = document.getElementById('noBtn');
+        const positions = [
+            {top: '35%', left: '55%'},   // 1. рядом с "Да"
+            {top: '10%', left: '10%'},   // 2. верхний левый
+            {top: '65%', left: '60%'},   // 3. нижний правый
+            {top: '40%', left: '75%'}    // 4. верхний правый
+        ];
+
+        let current = 0;
+
+        function moveNo() {
+            let next;
+            do { next = Math.floor(Math.random() * 4); } while (next === current);
+            current = next;
+            
+            noBtn.style.top  = positions[next].top;
+            noBtn.style.left = positions[next].left;
+            noBtn.classList.add('moving');
+            setTimeout(() => noBtn.classList.remove('moving'), 700);
+        }
+
+        noBtn.addEventListener('mouseenter', moveNo);
+        noBtn.addEventListener('click', (e) => { e.preventDefault(); moveNo(); });
+
+        // Кнопка "Да"
+        document.getElementById('yesBtn').addEventListener('click', () => {
+            window.location.href = 'yes.html';
+        });
+    </script>
+</body>
+</html>

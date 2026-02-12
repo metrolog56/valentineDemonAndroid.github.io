@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для самой главной валентинки</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #ffe5f0 0%, #ff9a9e 30%, #fad0c4 80%);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hearts {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 32px;
+            color: #ff1493;
+            text-shadow: 0 0 12px #fff;
+            animation: fall linear infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 5;
+            max-width: 960px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 3.4rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            text-shadow: 0 6px 24px rgba(255, 20, 147, 0.45);
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            max-width: 620px;
+            margin: 0 auto 32px;
+        }
+
+        .stack-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        #stack {
+            position: relative;
+            width: min(320px, 80vw);
+            height: min(380px, 90vw);
+        }
+
+        .photo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 88%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+            transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
+            opacity: 0;
+        }
+
+        @keyframes flyIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -60%) scale(0.9) rotate(var(--rot, 0deg));
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(var(--rot, 0deg));
+            }
+        }
+
+        .final-text {
+            font-size: 1.3rem;
+            max-width: 640px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .final-text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .final-text strong {
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 16px;
+            }
+
+            .lead {
+                font-size: 1rem;
+                margin-bottom: 24px;
+            }
+
+            #stack {
+                width: 78vw;
+                height: 92vw;
+            }
+
+            .final-text {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <div class="content">
+        <h1>Спасибо, что ты моя валентинка 💌</h1>
+        <p class="lead">
+            Каждая из этих фотографий&nbsp;&mdash; маленький кусочек нашей истории.
+            Я безмерно благодарен за все моменты, которые мы прожили вместе, и за те,
+            которые ещё только впереди.
+        </p>
+
+        <div class="stack-wrapper">
+            <div id="stack"></div>
+        </div>
+
+        <p id="finalText" class="final-text">
+            <strong>Ты&nbsp;&mdash; моё самое любимое чудо.</strong><br>
+            Пусть этот год подарит нам ещё больше улыбок, путешествий и тёплых объятий.
+        </p>
+    </div>
+
+    <script>
+        // Падающие сердечки
+        function createHeart() {
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.textContent = ['❤️','💖','💗','💓','💞'][Math.floor(Math.random() * 5)];
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (Math.random() * 5 + 7) + 's';
+            h.style.fontSize = (Math.random() * 28 + 28) + 'px';
+            document.getElementById('hearts').appendChild(h);
+            setTimeout(() => h.remove(), 16000);
+        }
+        setInterval(createHeart, 200);
+        for (let i = 0; i < 35; i++) createHeart();
+
+        // ←←← ЗДЕСЬ НУЖНО ПОДСТАВИТЬ ТВОИ РЕАЛЬНЫЕ ССЫЛКИ НА ФОТО
+        // Просто замени каждый URL на свой, порядок — как в комментариях.
+        const photos = [
+            "https://files.catbox.moe/ваш_первый_файл.jpg",   // 1. поцелуй на фоне неба
+            "https://files.catbox.moe/ваш_второй_файл.jpg",   // 2. на палубе / лодке
+            "https://files.catbox.moe/ваш_третий_файл.jpg",   // 3. ёлка, сердечко руками
+            "https://files.catbox.moe/ваш_четвёртый_файл.jpg",// 4. поезд, прыжок из вагона
+            "https://files.catbox.moe/ваш_пятый_файл.jpg",    // 5. с круглой штукой на набережной
+            "https://files.catbox.moe/ваш_шестой_файл.jpg",   // 6. выпускной / мантия
+            "https://files.catbox.moe/ваш_седьмой_файл.jpg",  // 7. объятия у озера (жёлтые шорты)
+            "https://files.catbox.moe/ваш_восьмой_файл.jpg",  // 8. портрет у воды (Surfer Before...)
+            "https://files.catbox.moe/ваш_девятый_файл.jpg",  // 9. в джинсах у кирпичной стены
+            "https://files.catbox.moe/ваш_десятый_файл.jpg",  // 10. пуховик, фиолетовый свет
+            "https://files.catbox.moe/ваш_одиннадцатый_файл.jpg", // 11. селфи с ярким макияжем
+            "https://files.catbox.moe/ваш_двенадцатый_файл.jpg",  // 12. поцелуй на Красной площади
+            "https://files.catbox.moe/ваш_тринадцатый_файл.jpg",  // 13. в мечети / храме
+            "https://files.catbox.moe/ваш_четырнадцатый_файл.jpg",// 14. зимний собор ночью
+            "https://files.catbox.moe/ваш_пятнадцатый_файл.jpg",  // 15. лифт с едой
+            "https://files.catbox.moe/ваш_шестнадцатый_файл.jpg", // 16. на жёлтой качалке с букетом
+            "https://files.catbox.moe/ваш_семнадцатый_файл.jpg",  // 17. небоскрёбы, Гонконг?
+            "https://files.catbox.moe/ваш_восемнадцатый_файл.jpg" // 18. зеркало, новогодняя ёлка
+        ];
+
+        const stack = document.getElementById('stack');
+        let i = 0;
+
+        function addPhoto() {
+            if (i >= photos.length) {
+                document.getElementById('finalText').classList.add('show');
+                return;
+            }
+
+            const img = document.createElement('img');
+            img.src = photos[i];
+            img.className = 'photo';
+
+            const rot = -14 + (i * 8);
+            img.style.setProperty('--rot', rot + 'deg');
+            img.style.zIndex = 100 + i;
+            img.style.animation = `flyIn 1.2s ${i * 0.12}s forwards`;
+
+            stack.appendChild(img);
+            i++;
+            setTimeout(addPhoto, 720);
+        }
+
+        window.onload = addPhoto;
+    </script>
+</body>
+</html>
