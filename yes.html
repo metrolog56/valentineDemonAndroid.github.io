@@ -225,7 +225,9 @@
             img.title = photos[i].title;
             img.className = 'photo';
 
-            const rot = -14 + (i * 8);
+            // Небольшие повороты, чтобы стопка выглядела живой, но без переворотов
+            const angles = [-8, -4, 0, 4, 8];
+            const rot = angles[i % angles.length];
             img.style.setProperty('--rot', rot + 'deg');
             img.style.zIndex = 100 + i;
             img.style.animation = `flyIn 1.2s ${i * 0.12}s forwards`;
