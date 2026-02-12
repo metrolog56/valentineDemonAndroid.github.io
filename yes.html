@@ -187,27 +187,27 @@
         setInterval(createHeart, 200);
         for (let i = 0; i < 35; i++) createHeart();
 
-        // ←←← ЗДЕСЬ НУЖНО ПОДСТАВИТЬ ТВОИ РЕАЛЬНЫЕ ССЫЛКИ НА ФОТО
-        // Просто замени каждый URL на свой, порядок — как в комментариях.
+        // Фотографии хранятся прямо в репозитории, в папке image.
+        // Массив объектов: src — путь до файла, title — удобное название.
         const photos = [
-            "https://files.catbox.moe/ваш_первый_файл.jpg",   // 1. поцелуй на фоне неба
-            "https://files.catbox.moe/ваш_второй_файл.jpg",   // 2. на палубе / лодке
-            "https://files.catbox.moe/ваш_третий_файл.jpg",   // 3. ёлка, сердечко руками
-            "https://files.catbox.moe/ваш_четвёртый_файл.jpg",// 4. поезд, прыжок из вагона
-            "https://files.catbox.moe/ваш_пятый_файл.jpg",    // 5. с круглой штукой на набережной
-            "https://files.catbox.moe/ваш_шестой_файл.jpg",   // 6. выпускной / мантия
-            "https://files.catbox.moe/ваш_седьмой_файл.jpg",  // 7. объятия у озера (жёлтые шорты)
-            "https://files.catbox.moe/ваш_восьмой_файл.jpg",  // 8. портрет у воды (Surfer Before...)
-            "https://files.catbox.moe/ваш_девятый_файл.jpg",  // 9. в джинсах у кирпичной стены
-            "https://files.catbox.moe/ваш_десятый_файл.jpg",  // 10. пуховик, фиолетовый свет
-            "https://files.catbox.moe/ваш_одиннадцатый_файл.jpg", // 11. селфи с ярким макияжем
-            "https://files.catbox.moe/ваш_двенадцатый_файл.jpg",  // 12. поцелуй на Красной площади
-            "https://files.catbox.moe/ваш_тринадцатый_файл.jpg",  // 13. в мечети / храме
-            "https://files.catbox.moe/ваш_четырнадцатый_файл.jpg",// 14. зимний собор ночью
-            "https://files.catbox.moe/ваш_пятнадцатый_файл.jpg",  // 15. лифт с едой
-            "https://files.catbox.moe/ваш_шестнадцатый_файл.jpg", // 16. на жёлтой качалке с букетом
-            "https://files.catbox.moe/ваш_семнадцатый_файл.jpg",  // 17. небоскрёбы, Гонконг?
-            "https://files.catbox.moe/ваш_восемнадцатый_файл.jpg" // 18. зеркало, новогодняя ёлка
+            { src: "image/photo_2026-02-12 22.22.51.jpeg", title: "Фото 1" },
+            { src: "image/photo_2026-02-12 22.23.04.jpeg", title: "Фото 2" },
+            { src: "image/photo_2026-02-12 22.23.07.jpeg", title: "Фото 3" },
+            { src: "image/photo_2026-02-12 22.23.08.jpeg", title: "Фото 4" },
+            { src: "image/photo_2026-02-12 22.23.09.jpeg", title: "Фото 5" },
+            { src: "image/photo_2026-02-12 22.23.10.jpeg", title: "Фото 6" },
+            { src: "image/photo_2026-02-12 22.23.11.jpeg", title: "Фото 7" },
+            { src: "image/photo_2026-02-12 22.23.13.jpeg", title: "Фото 8" },
+            { src: "image/photo_2026-02-12 22.23.14.jpeg", title: "Фото 9" },
+            { src: "image/photo_2026-02-12 22.23.16.jpeg", title: "Фото 10" },
+            { src: "image/photo_2026-02-12 22.23.17.jpeg", title: "Фото 11" },
+            { src: "image/photo_2026-02-12 22.23.18.jpeg", title: "Фото 12" },
+            { src: "image/photo_2026-02-12 22.23.19.jpeg", title: "Фото 13" },
+            { src: "image/photo_2026-02-12 22.23.21.jpeg", title: "Фото 14" },
+            { src: "image/photo_2026-02-12 22.23.22.jpeg", title: "Фото 15" },
+            { src: "image/photo_2026-02-12 22.23.26.jpeg", title: "Фото 16" },
+            { src: "image/photo_2026-02-12 22.23.27.jpeg", title: "Фото 17" },
+            { src: "image/photo_2026-02-12 22.23.30.jpeg", title: "Фото 18" }
         ];
 
         const stack = document.getElementById('stack');
@@ -220,7 +220,9 @@
             }
 
             const img = document.createElement('img');
-            img.src = photos[i];
+            img.src = photos[i].src;
+            img.alt = photos[i].title;
+            img.title = photos[i].title;
             img.className = 'photo';
 
             const rot = -14 + (i * 8);
